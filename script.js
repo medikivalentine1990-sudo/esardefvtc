@@ -5,95 +5,76 @@
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
 
-menuBtn.addEventListener("click", function () {
+if (menuBtn && navMenu) {
+    menuBtn.addEventListener("click", function () {
+        navMenu.classList.toggle("active");
 
-    navMenu.classList.toggle("active");
-
-    if (navMenu.classList.contains("active")) {
-        menuBtn.innerHTML = "✕";
-    } else {
-        menuBtn.innerHTML = "☰";
-    }
-
-});
-
-
-// Close menu after clicking a link
-
-document.querySelectorAll("#navMenu a").forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-        navMenu.classList.remove("active");
-        menuBtn.innerHTML = "☰";
-
+        if (navMenu.classList.contains("active")) {
+            menuBtn.innerHTML = "✕";
+        } else {
+            menuBtn.innerHTML = "☰";
+        }
     });
 
-});
-
-
+    document.querySelectorAll("#navMenu a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            navMenu.classList.remove("active");
+            menuBtn.innerHTML = "☰";
+        });
+    });
+}
 
 // ===============================
 // SELECT PROGRAM
 // ===============================
 
 function selectProgram(programName) {
-
     const program = document.getElementById("program");
-
-    program.value = programName;
-
+    if (program) {
+        program.value = programName;
+    }
 }
-
-
 
 // ===============================
 // WHATSAPP APPLICATION
 // ===============================
 
-const applicationForm =
-    document.getElementById("applicationForm");
+const applicationForm = document.getElementById("applicationForm");
 
+if (applicationForm) {
+    applicationForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-applicationForm.addEventListener("submit", function(event) {
+        const nameInput = document.getElementById("name");
+        const phoneInput = document.getElementById("phone");
+        const genderInput = document.getElementById("gender");
+        const programInput = document.getElementById("program");
+        const messageInput = document.getElementById("message");
 
-    event.preventDefault();
+        if (!nameInput || !phoneInput || !programInput || !genderInput || !messageInput) {
+            alert("Form elements are missing. Please refresh and try again.");
+            return;
+        }
 
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const gender = genderInput.value;
+        const program = programInput.value;
+        const message = messageInput.value.trim();
 
-    const name =
-        document.getElementById("name").value.trim();
+        if (!name || !phone || !program) {
+            alert("Please complete all required fields.");
+            return;
+        }
 
-    const phone =
-        document.getElementById("phone").value.trim();
+        const normalizedPhone = phone.replace(/\D+/g, "");
+        if (normalizedPhone.length < 9 || normalizedPhone.length > 15) {
+            alert("Please enter a valid phone number.");
+            return;
+        }
 
-    const gender =
-        document.getElementById("gender").value;
-
-    const program =
-        document.getElementById("program").value;
-
-    const message =
-        document.getElementById("message").value.trim();
-
-
-    if (!name || !phone || !program) {
-
-        alert("Please complete all required fields.");
-
-        return;
-
-    }
-
-
-    // ESARDEF WhatsApp number
-
-    const whatsappNumber =
-        "237679952732";
-
-
-    const whatsappMessage =
-
-`*ESARDEF VTC ONLINE APPLICATION*
+        const whatsappNumber = "237679952732";
+        const whatsappMessage = `*ESARDEF VTC ONLINE APPLICATION*
 
 *Full Name:* ${name}
 
@@ -107,51 +88,49 @@ applicationForm.addEventListener("submit", function(event) {
 
 I would like to apply for admission at ESARDEF Computer and Catering Vocational Training Center, Limbe.`;
 
+        const whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
+        const popup = window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
-    const whatsappURL =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(whatsappMessage);
-
-
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
-
-});
-
-
+        if (!popup) {
+            window.location.href = whatsappURL;
+        }
+    });
+}
 
 // ===============================
 // BACK TO TOP
 // ===============================
 
-const topBtn =
-    document.getElementById("topBtn");
+const topBtn = document.getElementById("topBtn");
 
-
-window.addEventListener("scroll", function() {
-
-    if (window.scrollY > 500) {
-
-        topBtn.classList.add("show");
-
-    } else {
-
-        topBtn.classList.remove("show");
-
-    }
-
-});
-
-
-topBtn.addEventListener("click", function() {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+if (topBtn) {
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 500) {
+            topBtn.classList.add("show");
+        } else {
+            topBtn.classList.remove("show");
+        }
     });
 
+    topBtn.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
+// ===============================
+// SAFE EXTERNAL LINKS
+// ===============================
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('a[target="_blank"]').forEach(function (link) {
+        if (!link.rel.includes("noopener")) {
+            link.rel += " noopener";
+        }
+        if (!link.rel.includes("noreferrer")) {
+            link.rel += " noreferrer";
+        }
+    });
 });
