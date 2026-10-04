@@ -29,9 +29,7 @@ a {
     margin: auto;
 }
 
-
 /* TOP BAR */
-
 .top-bar {
     background: #032e57;
     color: white;
@@ -45,9 +43,7 @@ a {
     padding: 7px 0;
 }
 
-
 /* NAVIGATION */
-
 header {
     position: sticky;
     top: 0;
@@ -113,24 +109,14 @@ nav a:hover {
     color: #0757a5;
 }
 
-
 /* HERO */
-
 .hero {
     min-height: 680px;
     display: flex;
     align-items: center;
     position: relative;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(2,35,68,.94),
-            rgba(2,75,130,.50)
-        ),
-        url("images/grad.jpg")
-        center/cover no-repeat;
-
+    background: linear-gradient(90deg, rgba(2,35,68,.94), rgba(2,75,130,.50)),
+        url("grad.jpg") center/cover no-repeat;
     color: white;
 }
 
@@ -167,9 +153,7 @@ nav a:hover {
     margin: 20px 0 30px;
 }
 
-
 /* BUTTONS */
-
 .hero-buttons {
     display: flex;
     gap: 15px;
@@ -197,13 +181,12 @@ nav a:hover {
     color: #0757a5;
 }
 
-
 /* STATS */
-
 .stats {
     display: flex;
     gap: 50px;
     margin-top: 55px;
+    flex-wrap: wrap;
 }
 
 .stats strong {
@@ -216,9 +199,7 @@ nav a:hover {
     color: #d5e8f5;
 }
 
-
 /* GENERAL */
-
 .section {
     padding: 90px 0;
 }
@@ -250,9 +231,7 @@ h2 span {
     color: #6b7788;
 }
 
-
 /* ABOUT */
-
 .two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -306,9 +285,7 @@ h2 span {
     color: #0757a5;
 }
 
-
 /* PROGRAMS */
-
 .programs,
 .gallery {
     background: #f4f8fc;
@@ -367,9 +344,7 @@ h2 span {
     font-weight: bold;
 }
 
-
 /* FACILITIES */
-
 .facility-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -396,9 +371,7 @@ h2 span {
     color: #6a7686;
 }
 
-
 /* GALLERY */
-
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -417,9 +390,7 @@ h2 span {
     transform: scale(1.03);
 }
 
-
 /* APPLICATION */
-
 .application {
     background: #062f58;
     color: white;
@@ -462,9 +433,7 @@ h2 span {
     color: white;
 }
 
-
 /* FORM */
-
 .application-form {
     background: white;
     color: #152238;
@@ -518,15 +487,9 @@ h2 span {
     margin-top: 10px;
 }
 
-
 /* CTA */
-
 .cta {
-    background: linear-gradient(
-        100deg,
-        #0757a5,
-        #078fc8
-    );
+    background: linear-gradient(100deg, #0757a5, #078fc8);
     color: white;
     padding: 55px 0;
 }
@@ -542,9 +505,7 @@ h2 span {
     color: white;
 }
 
-
 /* CONTACT */
-
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -577,9 +538,7 @@ h2 span {
     color: #0757a5;
 }
 
-
 /* FOOTER */
-
 footer {
     background: #031c35;
     color: #b7c8d8;
@@ -643,9 +602,7 @@ footer {
     font-size: 12px;
 }
 
-
 /* BACK TO TOP */
-
 #topBtn {
     position: fixed;
     right: 20px;
@@ -659,36 +616,30 @@ footer {
     font-size: 20px;
     display: none;
     cursor: pointer;
+    z-index: 2000;
 }
 
 #topBtn.show {
     display: block;
 }
 
-
 /* TABLET */
-
-@media(max-width:1000px) {
-
+@media (max-width: 1000px) {
     .program-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .contact-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .footer-grid {
         grid-template-columns: 1fr 1fr;
     }
-
 }
 
-
 /* MOBILE */
-
-@media(max-width:800px) {
-
+@media (max-width: 800px) {
     .menu-btn {
         display: block;
     }
@@ -720,16 +671,12 @@ footer {
     }
 
     .gallery-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-
 /* SMALL PHONE */
-
-@media(max-width:560px) {
-
+@media (max-width: 560px) {
     .top-content {
         justify-content: center;
         gap: 10px;
@@ -776,5 +723,4 @@ footer {
         flex-direction: column;
         align-items: flex-start;
     }
-
 }
