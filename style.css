@@ -1,11 +1,11 @@
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
 }
 
 body {
@@ -94,6 +94,7 @@ nav a {
     color: #152238;
     font-size: 14px;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
@@ -115,16 +116,8 @@ nav a:hover {
     display: flex;
     align-items: center;
     position: relative;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(2,35,68,.94),
-            rgba(2,75,130,.50)
-        ),
-        url("grad.jpg")
-        center/cover no-repeat;
-
+    background: linear-gradient(90deg, rgba(2,35,68,.94), rgba(2,75,130,.50)),
+        url("grad.jpg") center/cover no-repeat;
     color: white;
 }
 
@@ -137,6 +130,7 @@ nav a:hover {
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .tag.blue {
@@ -165,6 +159,7 @@ nav a:hover {
 .hero-buttons {
     display: flex;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -172,7 +167,8 @@ nav a:hover {
     padding: 13px 24px;
     border-radius: 7px;
     font-weight: bold;
-    transition: .3s;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -184,9 +180,18 @@ nav a:hover {
     color: white;
 }
 
+.primary:hover {
+    background: #0991c4;
+    box-shadow: 0 8px 20px rgba(16, 168, 223, 0.3);
+}
+
 .secondary {
     background: white;
     color: #0757a5;
+}
+
+.secondary:hover {
+    background: #f0f8ff;
 }
 
 /* STATS */
@@ -310,7 +315,7 @@ h2 span {
     padding: 26px;
     border-radius: 13px;
     border: 1px solid #dce6ef;
-    transition: .3s;
+    transition: all 0.3s ease;
 }
 
 .program-card:hover {
@@ -320,6 +325,7 @@ h2 span {
 
 .program-card.featured {
     border: 2px solid #10a8df;
+    background: linear-gradient(135deg, #f0f8ff 0%, white 100%);
 }
 
 .program-icon {
@@ -333,6 +339,8 @@ h2 span {
     padding: 5px 8px;
     font-size: 10px;
     font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .program-card h3 {
@@ -350,6 +358,11 @@ h2 span {
     color: #0757a5;
     font-size: 13px;
     font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.program-card a:hover {
+    color: #10a8df;
 }
 
 /* FACILITIES */
@@ -363,6 +376,11 @@ h2 span {
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 12px 35px rgba(0,0,0,.09);
+    transition: transform 0.3s ease;
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
 }
 
 .facility-card img {
@@ -391,7 +409,7 @@ h2 span {
     height: 245px;
     object-fit: cover;
     border-radius: 10px;
-    transition: .3s;
+    transition: transform 0.3s ease;
 }
 
 .gallery-grid img:hover {
@@ -471,6 +489,15 @@ h2 span {
     border: 1px solid #d9e2eb;
     border-radius: 6px;
     font: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.application-form input:focus,
+.application-form select:focus,
+.application-form textarea:focus {
+    outline: none;
+    border-color: #10a8df;
+    box-shadow: 0 0 0 3px rgba(16, 168, 223, 0.1);
 }
 
 .application-form textarea {
@@ -486,6 +513,12 @@ h2 span {
     border-radius: 7px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    background: #128c3c;
+    box-shadow: 0 6px 20px rgba(21, 148, 71, 0.3);
 }
 
 .application-form small {
@@ -525,6 +558,12 @@ h2 span {
     padding: 25px;
     border: 1px solid #dce6ef;
     border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    border-color: #078fc8;
+    box-shadow: 0 8px 25px rgba(7, 143, 200, 0.15);
 }
 
 .contact-icon {
@@ -542,8 +581,13 @@ h2 span {
     font-size: 13px;
 }
 
+.contact-card a {
+    transition: color 0.3s ease;
+}
+
 .contact-card a:hover {
     color: #0757a5;
+    font-weight: 500;
 }
 
 /* FOOTER */
@@ -592,6 +636,7 @@ footer {
     color: #b7c8d8;
     font-size: 13px;
     margin: 7px 0;
+    transition: color 0.3s ease;
 }
 
 .footer-grid a:hover {
@@ -625,10 +670,22 @@ footer {
     display: none;
     cursor: pointer;
     z-index: 2000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(7, 87, 165, 0.3);
+}
+
+#topBtn:hover {
+    background: #054a80;
+    transform: translateY(-3px);
 }
 
 #topBtn.show {
     display: block;
+}
+
+/* STRUCTURED DATA SCHEMA FOR SEO */
+script[type="application/ld+json"] {
+    display: none;
 }
 
 /* TABLET */
@@ -643,6 +700,10 @@ footer {
 
     .footer-grid {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .application-grid {
+        gap: 40px;
     }
 }
 
@@ -681,6 +742,10 @@ footer {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .cta-content {
+        gap: 20px;
+    }
 }
 
 /* SMALL PHONE */
@@ -701,7 +766,11 @@ footer {
 
     .hero-buttons {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+    }
+
+    .btn {
+        text-align: center;
     }
 
     .stats {
@@ -729,6 +798,25 @@ footer {
 
     .cta-content {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+    }
+
+    .application-grid {
+        gap: 30px;
+    }
+}
+
+/* PRINT STYLES */
+@media print {
+    .top-bar,
+    header,
+    #topBtn,
+    .whatsapp-btn {
+        display: none;
+    }
+
+    body {
+        color: black;
+        background: white;
     }
 }
