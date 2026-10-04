@@ -115,8 +115,16 @@ nav a:hover {
     display: flex;
     align-items: center;
     position: relative;
-    background: linear-gradient(90deg, rgba(2,35,68,.94), rgba(2,75,130,.50)),
-        url("grad.jpg") center/cover no-repeat;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(2,35,68,.94),
+            rgba(2,75,130,.50)
+        ),
+        url("grad.jpg")
+        center/cover no-repeat;
+
     color: white;
 }
 
