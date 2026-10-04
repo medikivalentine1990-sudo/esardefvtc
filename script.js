@@ -1,80 +1,89 @@
-// ===============================
-// MOBILE MENU
-// ===============================
+document.addEventListener("DOMContentLoaded", function () {
+    // ===============================
+    // MOBILE MENU
+    // ===============================
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
 
-const menuBtn = document.getElementById("menuBtn");
-const navMenu = document.getElementById("navMenu");
+    if (menuBtn && navMenu) {
+        const setMenuState = function (isOpen) {
+            navMenu.classList.toggle("active", isOpen);
+            menuBtn.setAttribute("aria-expanded", String(isOpen));
+            menuBtn.textContent = isOpen ? "✕" : "☰";
+        };
 
-if (menuBtn && navMenu) {
-    menuBtn.addEventListener("click", function () {
-        navMenu.classList.toggle("active");
-
-        if (navMenu.classList.contains("active")) {
-            menuBtn.innerHTML = "✕";
-        } else {
-            menuBtn.innerHTML = "☰";
-        }
-    });
-
-    document.querySelectorAll("#navMenu a").forEach(function (link) {
-        link.addEventListener("click", function () {
-            navMenu.classList.remove("active");
-            menuBtn.innerHTML = "☰";
+        menuBtn.addEventListener("click", function () {
+            const isOpen = !navMenu.classList.contains("active");
+            setMenuState(isOpen);
         });
-    });
-}
 
-// ===============================
-// SELECT PROGRAM
-// ===============================
+        document.querySelectorAll("#navMenu a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                setMenuState(false);
+            });
+        });
 
-function selectProgram(programName) {
-    const program = document.getElementById("program");
-    if (program) {
-        program.value = programName;
+        document.addEventListener("click", function (event) {
+            const clickedInsideNav = navMenu.contains(event.target);
+            const clickedOnButton = menuBtn.contains(event.target);
+
+            if (!clickedInsideNav && !clickedOnButton && navMenu.classList.contains("active")) {
+                setMenuState(false);
+            }
+        });
     }
-}
 
-// ===============================
-// WHATSAPP APPLICATION
-// ===============================
-
-const applicationForm = document.getElementById("applicationForm");
-
-if (applicationForm) {
-    applicationForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const nameInput = document.getElementById("name");
-        const phoneInput = document.getElementById("phone");
-        const genderInput = document.getElementById("gender");
-        const programInput = document.getElementById("program");
-        const messageInput = document.getElementById("message");
-
-        if (!nameInput || !phoneInput || !programInput || !genderInput || !messageInput) {
-            alert("Form elements are missing. Please refresh and try again.");
-            return;
+    // ===============================
+    // SELECT PROGRAM
+    // ===============================
+    window.selectProgram = function (programName) {
+        const program = document.getElementById("program");
+        if (program) {
+            program.value = programName;
+            program.scrollIntoView({ behavior: "smooth", block: "center" });
         }
+    };
 
-        const name = nameInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const gender = genderInput.value;
-        const program = programInput.value;
-        const message = messageInput.value.trim();
+    // ===============================
+    // WHATSAPP APPLICATION
+    // ===============================
+    const applicationForm = document.getElementById("applicationForm");
 
-        if (!name || !phone || !program) {
-            alert("Please complete all required fields.");
-            return;
-        }
+    if (applicationForm) {
+        applicationForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        const normalizedPhone = phone.replace(/\D+/g, "");
-        if (normalizedPhone.length < 9 || normalizedPhone.length > 15) {
-            alert("Please enter a valid phone number.");
-            return;
-        }
+            const nameInput = document.getElementById("name");
+            const phoneInput = document.getElementById("phone");
+            const genderInput = document.getElementById("gender");
+            const programInput = document.getElementById("program");
+            const messageInput = document.getElementById("message");
 
-        const whatsappNumber = "237679952732";
-        const whatsappMessage = `*ESARDEF VTC ONLINE APPLICATION*
+            if (!nameInput || !phoneInput || !programInput || !genderInput || !messageInput) {
+                alert("Form elements are missing. Please refresh and try again.");
+                return;
+            }
+
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const gender = genderInput.value;
+            const program = programInput.value;
+            const message = messageInput.value.trim();
+
+            if (!name || !phone || !program) {
+                alert("Please complete all required fields.");
+                return;
+            }
+
+            const normalizedPhone = phone.replace(/\D+/g, "");
+            if (normalizedPhone.length < 9 || normalizedPhone.length > 15) {
+                alert("Please enter a valid phone number.");
+                phoneInput.focus();
+                return;
+            }
+
+            const whatsappNumber = "237679952732";
+            const whatsappMessage = `*ESARDEF VTC ONLINE APPLICATION*
 
 *Full Name:* ${name}
 
@@ -88,43 +97,40 @@ if (applicationForm) {
 
 I would like to apply for admission at ESARDEF Computer and Catering Vocational Training Center, Limbe.`;
 
-        const whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
-        const popup = window.open(whatsappURL, "_blank", "noopener,noreferrer");
+            const whatsappURL = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
+            const popup = window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
-        if (!popup) {
-            window.location.href = whatsappURL;
-        }
-    });
-}
-
-// ===============================
-// BACK TO TOP
-// ===============================
-
-const topBtn = document.getElementById("topBtn");
-
-if (topBtn) {
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 500) {
-            topBtn.classList.add("show");
-        } else {
-            topBtn.classList.remove("show");
-        }
-    });
-
-    topBtn.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            if (!popup) {
+                window.location.href = whatsappURL;
+            }
         });
-    });
-}
+    }
 
-// ===============================
-// SAFE EXTERNAL LINKS
-// ===============================
+    // ===============================
+    // BACK TO TOP
+    // ===============================
+    const topBtn = document.getElementById("topBtn");
 
-document.addEventListener("DOMContentLoaded", function () {
+    if (topBtn) {
+        const toggleTopButton = function () {
+            topBtn.classList.toggle("show", window.scrollY > 500);
+        };
+
+        toggleTopButton();
+
+        window.addEventListener("scroll", toggleTopButton);
+
+        topBtn.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
+
+    // ===============================
+    // SAFE EXTERNAL LINKS
+    // ===============================
     document.querySelectorAll('a[target="_blank"]').forEach(function (link) {
         if (!link.rel.includes("noopener")) {
             link.rel += " noopener";
